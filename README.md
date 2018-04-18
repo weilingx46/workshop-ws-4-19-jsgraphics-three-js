@@ -1,47 +1,49 @@
 # CS52 Workshops: JS Graphics
 
-> Three.js is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here <-- assuming there's a link to the presentation...
+[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here <-- assuming there's a link to the presentation...
 
 ## Overview
 
-> We'll be going over some of the basics of Three.js by creating a globe that you can rotate with your mouse and arrow keys. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc...
+We'll be going over some of the basics of Three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
+
+![globe](./public/globe-cap.png)
 
 ## Setup
 
-> Clone the repo and follow the instructions to get started.
+Clone the repo and follow the instructions to get started.
+
+```bash
+git clone
+npm install
+npm start
+```
 
 ## Step by Step
 
->* Explanations of the what **and** the why behind each step. Try to include:
-  * higher level concepts
-  * best practices
-
->Remember to explain any notation you are using.
-
 ### Getting Started
-Note: If you’re not using Node, refer to the starter code in the three.js documentation rather than doing Steps 1 & 2 below.
 
-##### 1. Set up your files
-
-If you look at my code, you’ll see an Express app using React on the front end to inject the 3D component into my HTML file. This is extraneous for the purpose of this tutorial, so your file structure can consist of simply a .html and a .js file. Make sure you’ve created your package.json file (you can run npm init --y). You’ll also need to install webpack to bundle your .js file with the three module.
+##### 1. Set up your files2
 
 Your HTML file can look something like this:
 
-```javascript
-<!DOCTYPE html>
+```js
 <html>
- <head>
- </head>
- <body>
-     <div id="container" width="100vw" height="100vh" />
-     <script src="bundle.js"></script>
- </body>
+	<head>
+		<title>It's a Large World</title>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/91/three.min.js"></script>
+    <div id="container" width="100vw" height="100vh" />
+		<script src="main.js"></script>
+	</body>
+</html>
+
 </html>
 ```
 
 ##### 2. Install and add three.js
 
-Install three.js by running npm install three, and then import it into your main .js file.
+Install three.js by running `npm install three`, and then import it into your main.js file.
 
 `const THREE = require('three');`
 
@@ -240,25 +242,37 @@ And finally, we define our event listener:
 
 And there you have it!
 
-Feel free to experiment with the sphere’s texture/image (other planets?), background (add stars?), animations (zooming, resizing…), and so on. There are other three.js globes out there, and I’d love to see your own variations in the comments!
+### Deployment
+
+Finally, let’s deploy our beautiful animation to surge! :rocket: You’ve done this a million times by now but here are the steps in case you forgot…
+
+* make sure you’re in the root directory (the same level as `index.html`) and type `surge`
+* when prompted, choose your domain name `<YOUR DOMAIN>.surge.sh`
+* ta-da! :dancer:
+
+### Extra Credit
+
+Now that you know some basic three.js... go nuts! :squirrel:
+
+Feel free to experiment with: 
+
+* the sphere’s texture and image :first_quarter_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
+* background :star2:
+* animations (zooming, resizing…) :mag:
+* and so on :relaxed:
 
 ## Summary / What you Learned
 
-include checkboxes:
+* [ ] what we’ve learned...
 
-[ ]
+## To Submit on Canvas
 
-[ ]
 
-[ ]
+* [ ] The surge URL for your sphere animation site
 
-[ ]
+## Additional Resources
 
-## Resources
-> https://threejs.org/
-
-> https://aerotwist.com/tutorials/getting-started-with-three-js/
-
-> https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb
-
-> https://codepen.io/natacoops/post/sugar-sugar-threejs-project-walkthrough
+* [Reference Tutorial for this Workshop](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)
+* [Aerotwist Tutorial](https://aerotwist.com/tutorials/getting-started-with-three-js/)
+* [Another Tutorial](https://codepen.io/natacoops/post/sugar-sugar-threejs-project-walkthrough)
+* [threejs.org](https://threejs.org/)
