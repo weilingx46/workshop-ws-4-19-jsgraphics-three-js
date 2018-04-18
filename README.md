@@ -1,4 +1,4 @@
-# CS52 Workshops:  TITLE OF YOUR WORKSHOP
+# CS52 Workshops: JS Graphics
 
 ![](http://i.giphy.com/eUh8NINbZf9Ys.gif)
 
