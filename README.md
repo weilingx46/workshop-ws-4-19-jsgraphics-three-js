@@ -26,7 +26,7 @@ Let’s start off with some basic html to get our site going. Create a new docum
 
  Your HTML file can look something like this:
 
-```javascript
+```
 <!DOCTYPE html>
 <html>
 	<head>
