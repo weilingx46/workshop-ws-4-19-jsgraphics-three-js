@@ -1,20 +1,20 @@
 # CS52 Workshops: JS Graphics
 
-> include brief motivation
+> Three.js is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here <-- assuming there's a link to the presentation...
 
 ## Overview
 
-> summary of what we're about to do.
+> We'll be going over some of the basics of Three.js by creating a globe that you can rotate with your mouse and arrow keys. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc...
 
 ## Setup
 
-> any necessary setup steps
+> Clone the repo and follow the instructions to get started.
 
 ## Step by Step
 
 >* Explanations of the what **and** the why behind each step. Try to include:
->  * higher level concepts
->  * best practices
+  * higher level concepts
+  * best practices
 
 >Remember to explain any notation you are using.
 
@@ -240,16 +240,7 @@ And finally, we define our event listener:
 
 And there you have it!
 
-### Extra Credit
-
-Now that you know some basic three.js... go nuts! :squirrel:
-
-Feel free to experiment with: 
-
-* the sphere’s texture and image :first_quarter_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
-* background :star2:
-* animations (zooming, resizing…) :mag:
-* and so on :relaxed:
+Feel free to experiment with the sphere’s texture/image (other planets?), background (add stars?), animations (zooming, resizing…), and so on. There are other three.js globes out there, and I’d love to see your own variations in the comments!
 
 ## Summary / What you Learned
 
@@ -264,5 +255,10 @@ include checkboxes:
 [ ]
 
 ## Resources
+> https://threejs.org/
 
-> cite any resources
+> https://aerotwist.com/tutorials/getting-started-with-three-js/
+
+> https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb
+
+> https://codepen.io/natacoops/post/sugar-sugar-threejs-project-walkthrough
