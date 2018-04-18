@@ -10,10 +10,10 @@ In this workshop (a simplified version of [this tutorial](https://levelup.gitcon
 
 ## Setup
 
-Clone the repo and follow the instructions to get started.
+Clone this repo and follow the instructions below to get started!
 
 ```bash
-git clone
+git clone https://github.com/dartmouth-cs52-18S/workshop-ws-4-19-jsgraphics-three-js.git
 npm install
 npm start
 ```
@@ -29,15 +29,13 @@ Let’s start off with some basic html to get our site going. Create a new docum
 ```javascript
 <html>
 	<head>
-		<title>It's a Large World</title>
+		<title>It’s a Large World</title>
 	</head>
 	<body>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/91/three.min.js"></script>
     		<div id="container" width="100%" height="100%" />
 		<script src="main.js"></script>
 	</body>
-</html>
-
 </html>
 ```
 
@@ -132,20 +130,20 @@ And now, we’ll create our sphere and its texture, and mesh them together using
 We call the load method, which takes in our image url ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that: 1) creates a sphere with the predefined attributes, 2) maps the texture to the material (read more here about materials in the three.js [docs](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)), 3) creates a mesh of our sphere and the material, and 4) adds the mesh to our globe group.
 
 ``` javascript
-loader.load( 'land_ocean_ice_cloud_2048.jpg', function ( texture ) {
+loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg', function ( texture ) {
+    //create the sphere
+    var sphere = new THREE.SphereGeometry( RADIUS, SEGMENTS, RINGS );
 
-  // Create the sphere
-  var sphere = new THREE.SphereGeometry( RADIUS, SEGMENTS, RINGS );
+    //map the texture to the material. Read more about materials in three.js docs
+    var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
 
-  // Map the texture to the material. 
-  var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+    //create a new mesh with sphere geometry.
+    var mesh = new THREE.Mesh( sphere, material );
 
-  // Create a new mesh with sphere geometry.
-  var mesh = new THREE.Mesh( sphere, material );
-
-  // Add mesh to globe
-  globe.add(mesh);
+    //add mesh to globe group
+    globe.add(mesh);
 } );
+
 ```
 
 Now that we have our sphere, let’s position it backwards (along the z axis) so that we can see it:
@@ -176,7 +174,7 @@ At this point, you should see a static globe if you open your HTML file in the b
 
 ## Creating the Animation
 
-#### 8. Setup Animation Loop
+#### 8. Set up animation loop
 
 First, we’re going to set up the update function for the built-in `requestAnimationFrame` to initially render our scene, and to re-render our scene after changes:
 
