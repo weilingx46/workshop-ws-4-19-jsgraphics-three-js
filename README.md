@@ -18,9 +18,9 @@ npm install
 npm start
 ```
 
-##Getting Started
+## Getting Started
 
-##### 1. Basic Html
+#### 1. Basic Html
 
 Let’s start off with some basic html to get our site going. Create a new document and lets call it `index.html`. Below we are including the three.js library, this can also be done using your webpack and calling `yarn install three`.  Lets then declare a basic container where our project will live. 
 
@@ -41,7 +41,7 @@ Let’s start off with some basic html to get our site going. Create a new docum
 </html>
 ```
 
-##### 2. DOM Element
+#### 2. DOM Element
 
 Let’s create another file in the same directory and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
 
@@ -54,7 +54,7 @@ const container = document.querySelector('#container');
 A 3D render is made up of three things **scene**, **camera**, and **renderer**. These are three things are necessary to actually have anything displayed. The next steps involve instantiating these. 
 
 
-##### 3. Create the Scene 
+#### 3. Create the Scene 
 
 Let’s start off with the scene. Our 3D render needs a place to live right?
 
@@ -63,7 +63,7 @@ Let’s start off with the scene. Our 3D render needs a place to live right?
 And add a black background:
 `scene.background = new THREE.Color( 0x000 );`
 
-##### 4. The Camera
+#### 4. The Camera
 We need to declare some variables that our camera is going to use!
 ``` javascript
 const WIDTH = window.innerWidth;
@@ -93,10 +93,10 @@ Finally we need to add the camera to the scene.
 
 `scene.add(camera);`
 
-##### 5. The WebGl Renderer
+#### 5. The WebGl Renderer
 
 Finally the last necessary object, the renderer! 
-WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. This is what we will be creating and attaching to our HTML container div. 
+WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. This is what we will be creating and attaching to our HTML container `div`. 
 
 `const renderer = new THREE.WebGLRenderer();`
 
@@ -106,7 +106,7 @@ Tell it that there is a container that needs rendering!
 ## Creating the Globe
 Now we can move on to our globe!
 
-##### 6. Create a sphere
+#### 6. Create a sphere
 
 Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes, cylinders, etc. Since I’m going for a planet Earth look, I’ll be using a sphere.
 
@@ -129,9 +129,7 @@ And now, we’ll create our sphere and its texture, and mesh them together using
 
 `var loader = new THREE.TextureLoader();`
 
-We call the load method, which takes in our image url (here’s the image I used) as the first argument, and a function that: 1) creates a sphere with the predefined attributes, 2) maps the texture to the material (read more here about materials in the three.js docs), 3) creates a mesh of our sphere and the material, and 4) adds the mesh to our globe group.
-
-Note: If you run into errors concerning the image link, use this: https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg
+We call the load method, which takes in our image url ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that: 1) creates a sphere with the predefined attributes, 2) maps the texture to the material (read more here about materials in the three.js [docs](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)), 3) creates a mesh of our sphere and the material, and 4) adds the mesh to our globe group.
 
 ``` javascript
 loader.load( 'land_ocean_ice_cloud_2048.jpg', function ( texture ) {
@@ -154,9 +152,9 @@ Now that we have our sphere, let’s position it backwards (along the z axis) so
 
 `globe.position.z = -300;`
 
-##### 7. Add lighting
+#### 7. Add lighting
 
-Since we used MeshBasicMaterial in the previous step (a material which is not affected by lighting), this next step is dispensable, but I wanted to include it in this tutorial because it’s usually an important component of a 3D scene.
+Since we used MeshBasicMaterial in the previous step (a material which is not affected by lighting), this next step is dispensable, but I we’re including it in this tutorial because it’s usually an important component of a 3D scene.
 
 First we’ll create a point light (the library has several other types of light):
 
@@ -177,11 +175,10 @@ And then we add it to the scene:
 At this point, you should see a static globe if you open your HTML file in the browser. Let’s get to animating it!
 
 ## Creating the Animation
-I’m going to be creating two sets of functions: one for rotating the globe with the arrow keys (step 12), and another for rotating it on mouse movement (step 13). Note: I used mostly my own code here. Three.js does provide animation systems and controls, but I haven’t yet successfully implemented this built-in functionality myself.
 
-##### 8. Setup
+#### 8. Setup Animation Loop
 
-First, we’re going to set up the update function for the built-in requestAnimationFrame to initially render our scene, and to re-render our scene after changes:
+First, we’re going to set up the update function for the built-in `requestAnimationFrame` to initially render our scene, and to re-render our scene after changes:
 
 ``` javascript
 function update () {
@@ -197,9 +194,9 @@ function update () {
 requestAnimationFrame(update);
 ```
 
-##### 9. Rotate on mouse movement
+#### 9. Rotate on mouse movement
 
-This is my favorite part, because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad.
+This is the best part, because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad.
 
 To start, we’ll set up an array that stores our previous mouse position, with its start value being at the center of the page:
 
@@ -248,16 +245,15 @@ Feel free to experiment with:
 * background :star2:
 * animations (zooming, resizing…) :mag:
 * adding new shapes: [Three Js Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
-
 * and so on :relaxed:
 
-## Summary / What you Learned
+## What you Did
 
-* [x] Instantiate a canvas, camera, renderer
+* [x] Instantiated a canvas, camera, renderer
 * [x] Created a basic object using the geometry class
 * [x] Added a point light object to shine on the 3D object
 * [x] Learned how to animate the 3D object
-* [x] Intro into some of the mechanics behind movement
+* [x] Introduced to some of the mechanics behind movement
 * [ ] Created your own 3D object
 
 ## To Submit on Canvas
@@ -270,4 +266,6 @@ Feel free to experiment with:
 * [Reference Tutorial for this Workshop](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)
 * [Aerotwist Tutorial](https://aerotwist.com/tutorials/getting-started-with-three-js/)
 * [Another Tutorial](https://codepen.io/natacoops/post/sugar-sugar-threejs-project-walkthrough)
-* [threejs.org](https://threejs.org/) Check out some of these websites!
+* [threejs.org](https://threejs.org/) 
+
+Check out some of these websites!
