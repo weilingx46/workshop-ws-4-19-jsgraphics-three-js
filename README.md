@@ -26,7 +26,7 @@ npm start
 
 Your HTML file can look something like this:
 
-```js
+```javascript
 <html>
 	<head>
 		<title>It's a Large World</title>
@@ -247,7 +247,7 @@ And there you have it!
 Finally, let’s deploy our beautiful animation to surge! :rocket: You’ve done this a million times by now but here are the steps in case you forgot…
 
 * make sure you’re in the root directory (the same level as `index.html`) and type `surge`
-* when prompted, choose your domain name `<YOUR DOMAIN>.surge.sh`
+* when prompted, choose your domain name (ex. `<YOUR DOMAIN>.surge.sh`)
 * ta-da! :dancer:
 
 ### Extra Credit
@@ -263,12 +263,12 @@ Feel free to experiment with:
 
 ## Summary / What you Learned
 
-* [ ] what we’ve learned...
+* [x] what we’ve learned...
 
 ## To Submit on Canvas
 
 
-* [ ] The surge URL for your sphere animation site
+* [x] The surge URL for your sphere animation site
 
 ## Additional Resources
 
