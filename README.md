@@ -48,7 +48,7 @@ Lets then declare a basic container where our project will live.
 Let’s create another file in the same directory and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
 
 ```javascript
-const container = document.querySelector('#container');
+const container = document.querySelector('#container')
 ```
 
 ## The 3D Render
@@ -60,40 +60,40 @@ A 3D render is made up of three things **scene**, **camera**, and **renderer**. 
 
 Let’s start off with the scene. Our 3D render needs a place to live, right?
 
-`const scene = new THREE.Scene();`
+`const scene = new THREE.Scene()`
 
 And add a black background:
-`scene.background = new THREE.Color( 0x000 );`
+`scene.background = new THREE.Color( 0x000 )`
 
 #### 4. The Camera
 We need to declare some variables that our camera is going to use!
 ``` javascript
-const WIDTH = window.innerWidth;
-const HEIGHT = window.innerHeight;
-const FOV= 45; 
-const ASPECT = WIDTH / HEIGHT;
-const NEAR = 0.1;
-const FAR = 10000;
+const WIDTH = window.innerWidth
+const HEIGHT = window.innerHeight
+const FOV= 45
+const ASPECT = WIDTH / HEIGHT
+const NEAR = 0.1
+const FAR = 10000
 ```
 What do these all mean??
 
 * **FOV**: Field of vision is the amount of the scene that is displayed on the screen calculated in degrees.
-* **Aspect**: Our aspect ratio should almost always be the width of the window / height of the window so that we do not squish objects when viewing on different devices.
+* **Aspect**: Our aspect ratio should almost always be the `window.width / window.height` so that we do not squish objects when viewing on different devices.
 * **Near** and **Far**: These values affect the performance in determining what gets rendered. Objects farther from the camera than **far** won’t get rendered and objects closer than **near** will also not render.
 Highly recommend you **play around with these** to understand what is going on.
 Three.js has multiple cameras for different project applications. Thy range from the OrthographicCamera that is used for rendering 2d models to the [ArrayCamera](https://threejs.org/docs/#api/cameras/ArrayCamera) that’s used for Virtual Reality. We will be using the PerspectiveCamera as it is best-applied purpose are 3d models.
 
 Instantiate the camera:
 
-`const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);`
+`const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR)`
 
 We also need to set the camera's location on the screen with x,y,z. We encourage you to play around with this a little bit:
 
-`camera.position.set( 0, 0, 500 );`
+`camera.position.set( 0, 0, 500 )`
 
 Finally, let’s attach the camera to the scene. 
 
-`scene.add(camera);`
+`scene.add(camera)`
 
 #### 5. The WebGL Renderer
 
@@ -101,13 +101,13 @@ Finally the last necessary object, the renderer!
 WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. 
 
 ``` javascript
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(WIDTH, HEIGHT);
+const renderer = new THREE.WebGLRenderer()
+renderer.setSize(WIDTH, HEIGHT)
 ```
 
 
 Tell your program that there is a container that needs rendering!
-`container.appendChild(renderer.domElement);`
+`container.appendChild(renderer.domElement)`
 
 ## Creating the Globe
 Now we can move on to our globe!
@@ -119,21 +119,21 @@ Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes
 We’ll start by defining the sphere’s attributes:
 
 ``` javascript
-const RADIUS = 200;
-const SEGMENTS = 50;
-const RINGS = 50;
+const RADIUS = 200
+const SEGMENTS = 50
+const RINGS = 50
 ```
 
 Then, because we want to texture the sphere with an image of the Earth, we’re going to create a group that will hold our sphere and its texture meshed together:
 
 ``` javascript
-const globe = new THREE.Group();
-scene.add(globe);
+const globe = new THREE.Group()
+scene.add(globe)
 ```
 
 And now, we’ll create our sphere and its texture, and mesh them together using three.js' TextureLoader:
 
-`var loader = new THREE.TextureLoader();`
+`var loader = new THREE.TextureLoader()`
 
 We call the load method, which takes in our image URL ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that:
 Creates a sphere with the predefined attributes
@@ -144,23 +144,23 @@ Adds the mesh to our globe group.
 ``` javascript
 loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg', function ( texture ) {
     //create the sphere
-    var sphere = new THREE.SphereGeometry( RADIUS, SEGMENTS, RINGS );
+    var sphere = new THREE.SphereGeometry( RADIUS, SEGMENTS, RINGS )
 
     //map the texture to the material. Read more about materials in three.js docs
-    var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+    var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } )
 
     //create a new mesh with sphere geometry.
-    var mesh = new THREE.Mesh( sphere, material );
+    var mesh = new THREE.Mesh( sphere, material )
 
     //add mesh to globe group
-    globe.add(mesh);
-} );
+    globe.add(mesh)
+} )
 
 ```
 
 Now that we have our sphere, let’s position it backward (along the z-axis) so that we can see it:
 
-`globe.position.z = -300;`
+`globe.position.z = -300`
 
 #### 7. Add lighting
 
@@ -168,19 +168,19 @@ Since we used MeshBasicMaterial in the previous step (a material which is not af
 
 First we’ll create a point light (the library has several other types of light):
 
-`const pointLight = new THREE.PointLight(0xFFFFFF);`
+`const pointLight = new THREE.PointLight(0xFFFFFF)`
 
 Now we set the light’s position:
 
 ``` javascript
-pointLight.position.x = 10;
-pointLight.position.y = 50;
-pointLight.position.z = 400;
+pointLight.position.x = 10
+pointLight.position.y = 50
+pointLight.position.z = 400
 ```
 
 And then we add it to the scene:
 
-`scene.add(pointLight);`
+`scene.add(pointLight)`
 
 At this point, you should see a static globe if you open your HTML file in the browser. Let’s get to animating it!
 
@@ -194,14 +194,14 @@ First, we’re going to set up the update function for the built-in `requestAnim
 function update () {
 
   //Render:
-  renderer.render(scene, camera);
+  renderer.render(scene, camera)
 
   // Schedule the next frame:
-  requestAnimationFrame(update);  
+  requestAnimationFrame(update) 
 }
 
 // Schedule the first frame:
-requestAnimationFrame(update);
+requestAnimationFrame(update)
 ```
 
 #### 9. Rotate on mouse movement
@@ -210,30 +210,30 @@ This is the best part because it almost feels like you’re spinning the globe w
 
 To start, we’ll set up an array that stores our previous mouse position, with its start value being at the center of the page:
 
-`var lastMove = [window.innerWidth/2, window.innerHeight/2];`
+`var lastMove = [window.innerWidth/2, window.innerHeight/2]`
 
 Next, we’ll define a listener function to fire when the mouse moves:
 
 ``` javascript
 function rotateOnMouseMove(e) {
-  e = e || window.event;
+  e = e || window.event
 
   //calculate difference between current and last mouse position
-  const moveX = ( e.clientX - lastMove[0]);
-  const moveY = ( e.clientY - lastMove[1]);
+  const moveX = ( e.clientX - lastMove[0])
+  const moveY = ( e.clientY - lastMove[1])
   //rotate the globe based on distance of mouse moves (x and y) 
-  globe.rotation.y += ( moveX * .005);
-  globe.rotation.x += ( moveY * .005);
+  globe.rotation.y += ( moveX * .005)
+  globe.rotation.x += ( moveY * .005)
 
   //store new position in lastMove
-  lastMove[0] = e.clientX;
-  lastMove[1] = e.clientY;
+  lastMove[0] = e.clientX
+  lastMove[1] = e.clientY
 }
 ```
 
 And finally, we define our event listener:
 
-`document.addEventListener('mousemove', rotateOnMouseMove);`
+`document.addEventListener('mousemove', rotateOnMouseMove)`
 
 And there you have it!
 
