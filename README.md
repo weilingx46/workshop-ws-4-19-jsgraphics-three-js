@@ -1,10 +1,10 @@
 # CS52 Workshops: JS Graphics
 
-[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here.
+[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here <-- assuming there's a link to the presentation...
 
 ## Overview
 
-In this workshop (based on [this tutorial](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)), we'll be going over some of the basics of three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
+In this workshop (a simplified version of [this tutorial](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)), we'll be going over some of the basics of three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
 
 ![globe](./public/globe-cap.png)
 
@@ -18,13 +18,13 @@ npm install
 npm start
 ```
 
-## Step by Step
+##Getting Started
 
-### Getting Started
+##### 1. Basic Html
 
-##### 1. Set up your files
+Let’s start off with some basic html to get our site going. Create a new document and lets call it `index.html`. Below we are including the three.js library, this can also be done using your webpack and calling `yarn install three`.  Lets then declare a basic container where our project will live. 
 
-Your HTML file can look something like this:
+ Your HTML file can look something like this:
 
 ```javascript
 <html>
@@ -33,7 +33,7 @@ Your HTML file can look something like this:
 	</head>
 	<body>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/91/three.min.js"></script>
-    <div id="container" width="100vw" height="100vh" />
+    		<div id="container" width="100%" height="100%" />
 		<script src="main.js"></script>
 	</body>
 </html>
@@ -41,51 +41,47 @@ Your HTML file can look something like this:
 </html>
 ```
 
-##### 2. Install and add three.js
+##### 2. DOM Element
 
-Install three.js by running `npm install three`, and then import it into your main.js file.
+Let’s create another file in the same directory and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
 
-`const THREE = require('three');`
+```javascript
+const container = document.querySelector('#container');
+```
 
-##### 3. Get the DOM element in which you want to attach the scene
+## The 3D Render
 
-`const container = document.querySelector('#container');`
+A 3D render is made up of three things **scene**, **camera**, and **renderer**. These are three things are necessary to actually have anything displayed. The next steps involve instantiating these. 
 
-We’ll be appending our 3D renderer to the container div shortly.
 
-### Creating the 3D Renderer
-To actually be able to display anything with three.js, we need three things: A scene, a camera, and a renderer so we can render the scene with the camera.(three.js documentation)
+##### 3. Create the Scene 
 
-##### 4. Create a WebGL renderer
+Let’s start off with the scene. Our 3D render needs a place to live right?
 
-WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. This is what we will be creating and attaching to our HTML container div in just a bit (after we create all the components that will go into our renderer).
+`const scene = new THREE.Scene();`
 
-To instantiate it:
+And add a black background:
+`scene.background = new THREE.Color( 0x000 );`
 
-`const renderer = new THREE.WebGLRenderer();`
-
-You’re also going to need to set the size of the renderer. I’ve set the width and height to that of the window:
-
+##### 4. The Camera
+We need to declare some variables that our camera is going to use!
 ``` javascript
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
-renderer.setSize(WIDTH, HEIGHT);
-```
-
-##### 5. Create a camera
-
-Three.js has a Camera class, inherited by its various sub-classes such as PerspectiveCamera (the one we’ll be using) or OrthographicCamera. PerspectiveCamera is most commonly used for 3D scenes because it mimics how the human eye sees.
-
-First, we’ll set up the camera attributes:
-
-``` javascript
-const VIEW_ANGLE = 45;
+const FOV= 45; 
 const ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
 const FAR = 10000;
 ```
+What do these all mean??
 
-And then instantiate the camera:
+* **FOV**: Field of vision is the amount of the scene that is displayed on the screen calculated in degrees.
+* **Aspect**: Our aspect ratio should almost always be width of the window / height of the window so that we do not squished objects when viewing on different devices.
+* **Near** and **Far**: These values affect the performance in determining what gets rendered. Objects farther from the camera than **far** won’t get rendered and objects closer than **near** will also not render.
+Highly recommend you **play around with these** to understand what is going on.
+Three.js has a Camera class, inherited by its various sub-classes such as PerspectiveCamera (the one we’ll be using) or OrthographicCamera. PerspectiveCamera is most commonly used for 3D scenes because it mimics how the human eye sees. There are many other types of cameras like an [ArrayCamera](https://threejs.org/docs/#api/cameras/ArrayCamera) that’s used for Virtual Reality. 
+
+Instantiate the camera:
 
 `const camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);`
 
@@ -93,32 +89,24 @@ We’ll also set the camera’s position on the x, y, and z axes:
 
 `camera.position.set( 0, 0, 500 );`
 
-##### 6. Create a scene
-
-Almost done with setup! Now we create a scene:
-
-`const scene = new THREE.Scene();`
-
-And add a black background:
-
-`scene.background = new THREE.Color( 0x000 );`
-
-##### 7. Add the camera to the scene
-
-Now that we have a scene, we can add the camera to it:
+Finally we need to add the camera to the scene.
 
 `scene.add(camera);`
 
-##### 8. Attach the renderer to the DOM element.
+##### 5. The WebGl Renderer
 
-And finally, as promised, we append our renderer to container.
+Finally the last necessary object, the renderer! 
+WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. This is what we will be creating and attaching to our HTML container div. 
 
+`const renderer = new THREE.WebGLRenderer();`
+
+Tell it that there is a container that needs rendering!
 `container.appendChild(renderer.domElement);`
 
-### Creating the Globe
+## Creating the Globe
 Now we can move on to our globe!
 
-##### 9. Create a sphere
+##### 6. Create a sphere
 
 Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes, cylinders, etc. Since I’m going for a planet Earth look, I’ll be using a sphere.
 
@@ -166,7 +154,7 @@ Now that we have our sphere, let’s position it backwards (along the z axis) so
 
 `globe.position.z = -300;`
 
-##### 10. Add lighting
+##### 7. Add lighting
 
 Since we used MeshBasicMaterial in the previous step (a material which is not affected by lighting), this next step is dispensable, but I wanted to include it in this tutorial because it’s usually an important component of a 3D scene.
 
@@ -188,10 +176,10 @@ And then we add it to the scene:
 
 At this point, you should see a static globe if you open your HTML file in the browser. Let’s get to animating it!
 
-### Creating the Animation
+## Creating the Animation
 I’m going to be creating two sets of functions: one for rotating the globe with the arrow keys (step 12), and another for rotating it on mouse movement (step 13). Note: I used mostly my own code here. Three.js does provide animation systems and controls, but I haven’t yet successfully implemented this built-in functionality myself.
 
-##### 11. Setup
+##### 8. Setup
 
 First, we’re going to set up the update function for the built-in requestAnimationFrame to initially render our scene, and to re-render our scene after changes:
 
@@ -209,7 +197,7 @@ function update () {
 requestAnimationFrame(update);
 ```
 
-##### 12. Rotate on mouse movement
+##### 9. Rotate on mouse movement
 
 This is my favorite part, because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad.
 
@@ -242,7 +230,7 @@ And finally, we define our event listener:
 
 And there you have it!
 
-### Deployment
+## Deployment
 
 Finally, let’s deploy our beautiful animation to surge! :rocket: You’ve done this a million times by now but here are the steps in case you forgot…
 
@@ -259,11 +247,18 @@ Feel free to experiment with:
 * the sphere’s texture and image :first_quarter_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
 * background :star2:
 * animations (zooming, resizing…) :mag:
+* adding new shapes: [Three Js Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
+
 * and so on :relaxed:
 
 ## Summary / What you Learned
 
-* [x] what we’ve learned...
+* [x] Instantiate a canvas, camera, renderer
+* [x] Created a basic object using the geometry class
+* [x] Added a point light object to shine on the 3D object
+* [x] Learned how to animate the 3D object
+* [x] Intro into some of the mechanics behind movement
+* [ ] Created your own 3D object
 
 ## To Submit on Canvas
 
@@ -275,4 +270,4 @@ Feel free to experiment with:
 * [Reference Tutorial for this Workshop](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)
 * [Aerotwist Tutorial](https://aerotwist.com/tutorials/getting-started-with-three-js/)
 * [Another Tutorial](https://codepen.io/natacoops/post/sugar-sugar-threejs-project-walkthrough)
-* [threejs.org](https://threejs.org/)
+* [threejs.org](https://threejs.org/) Check out some of these websites!
