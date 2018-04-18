@@ -13,8 +13,8 @@
 ## Step by Step
 
 >* Explanations of the what **and** the why behind each step. Try to include:
-  * higher level concepts
-  * best practices
+>  * higher level concepts
+>  * best practices
 
 >Remember to explain any notation you are using.
 
