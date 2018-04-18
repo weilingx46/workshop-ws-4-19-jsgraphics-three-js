@@ -22,7 +22,10 @@ npm start
 
 #### 1. Basic Html
 
-Let’s start off with some basic html to get our site going. Create a new document and lets call it `index.html`. Below we are including the three.js library, this can also be done using your webpack and calling `yarn install three`.  Lets then declare a basic container where our project will live. 
+Let’s start off with some basic HTML to get our site going. Create a new document and let's call it `index.html`. Below we are including the three.js library
+`npm install three`
+
+Lets then declare a basic container where our project will live. 
 
  Your HTML file can look something like this:
 
@@ -55,7 +58,7 @@ A 3D render is made up of three things **scene**, **camera**, and **renderer**. 
 
 #### 3. Create the Scene 
 
-Let’s start off with the scene. Our 3D render needs a place to live right?
+Let’s start off with the scene. Our 3D render needs a place to live, right?
 
 `const scene = new THREE.Scene();`
 
@@ -65,7 +68,6 @@ And add a black background:
 #### 4. The Camera
 We need to declare some variables that our camera is going to use!
 ``` javascript
-const VIEW_ANGLE = 45;
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 const FOV= 45; 
@@ -76,31 +78,35 @@ const FAR = 10000;
 What do these all mean??
 
 * **FOV**: Field of vision is the amount of the scene that is displayed on the screen calculated in degrees.
-* **Aspect**: Our aspect ratio should almost always be width of the window / height of the window so that we do not squished objects when viewing on different devices.
+* **Aspect**: Our aspect ratio should almost always be the width of the window / height of the window so that we do not squish objects when viewing on different devices.
 * **Near** and **Far**: These values affect the performance in determining what gets rendered. Objects farther from the camera than **far** won’t get rendered and objects closer than **near** will also not render.
 Highly recommend you **play around with these** to understand what is going on.
-Three.js has a Camera class, inherited by its various sub-classes such as PerspectiveCamera (the one we’ll be using) or OrthographicCamera. PerspectiveCamera is most commonly used for 3D scenes because it mimics how the human eye sees. There are many other types of cameras like an [ArrayCamera](https://threejs.org/docs/#api/cameras/ArrayCamera) that’s used for Virtual Reality. 
+Three.js has multiple cameras for different project applications. Thy range from the OrthographicCamera that is used for rendering 2d models to the [ArrayCamera](https://threejs.org/docs/#api/cameras/ArrayCamera) that’s used for Virtual Reality. We will be using the PerspectiveCamera as it is best-applied purpose are 3d models.
 
 Instantiate the camera:
 
-`const camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);`
+`const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);`
 
-We’ll also set the camera’s position on the x, y, and z axes:
+We also need to set the camera's location on the screen with x,y,z. We encourage you to play around with this a little bit:
 
 `camera.position.set( 0, 0, 500 );`
 
-Finally we need to add the camera to the scene.
+Finally, let’s attach the camera to the scene. 
 
 `scene.add(camera);`
 
-#### 5. The WebGl Renderer
+#### 5. The WebGL Renderer
 
 Finally the last necessary object, the renderer! 
-WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. This is what we will be creating and attaching to our HTML container `div`. 
+WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. 
 
-`const renderer = new THREE.WebGLRenderer();`
+``` javascript
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(WIDTH, HEIGHT);
+```
 
-Tell it that there is a container that needs rendering!
+
+Tell your program that there is a container that needs rendering!
 `container.appendChild(renderer.domElement);`
 
 ## Creating the Globe
@@ -108,7 +114,7 @@ Now we can move on to our globe!
 
 #### 6. Create a sphere
 
-Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes, cylinders, etc. Since I’m going for a planet Earth look, I’ll be using a sphere.
+Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes, cylinders, etc. Since I’m going for an Earth look, I’ll be using a sphere.
 
 We’ll start by defining the sphere’s attributes:
 
@@ -125,11 +131,15 @@ const globe = new THREE.Group();
 scene.add(globe);
 ```
 
-And now, we’ll create our sphere and its texture, and mesh them together using three.js’s TextureLoader:
+And now, we’ll create our sphere and its texture, and mesh them together using three.js' TextureLoader:
 
 `var loader = new THREE.TextureLoader();`
 
-We call the load method, which takes in our image url ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that: 1) creates a sphere with the predefined attributes, 2) maps the texture to the material (read more here about materials in the three.js [docs](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)), 3) creates a mesh of our sphere and the material, and 4) adds the mesh to our globe group.
+We call the load method, which takes in our image URL ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that:
+Creates a sphere with the predefined attributes
+Maps the texture to the material (read more here about materials in the three.js [docs](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)
+Creates a mesh of our sphere and the material
+Adds the mesh to our globe group.
 
 ``` javascript
 loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg', function ( texture ) {
@@ -148,7 +158,7 @@ loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land
 
 ```
 
-Now that we have our sphere, let’s position it backwards (along the z axis) so that we can see it:
+Now that we have our sphere, let’s position it backward (along the z-axis) so that we can see it:
 
 `globe.position.z = -300;`
 
@@ -196,7 +206,7 @@ requestAnimationFrame(update);
 
 #### 9. Rotate on mouse movement
 
-This is the best part, because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad.
+This is the best part because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad.
 
 To start, we’ll set up an array that stores our previous mouse position, with its start value being at the center of the page:
 
@@ -233,7 +243,7 @@ Finally, let’s deploy our beautiful animation to surge! :rocket: You’ve done
 
 * make sure you’re in the root directory (the same level as `index.html`) and type `surge`
 * when prompted, choose your domain name (ex. `<YOUR DOMAIN>.surge.sh`)
-* ta-da! :dancer:
+* Ta-da! :dancer:
 
 ### Extra Credit
 
@@ -247,7 +257,7 @@ Feel free to experiment with:
 * adding new shapes: [Three Js Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
 * and so on :relaxed:
 
-## What you Did
+## What You Did
 
 * [x] Instantiated a canvas, camera, renderer
 * [x] Created a basic object using the geometry class
@@ -256,7 +266,7 @@ Feel free to experiment with:
 * [x] Introduced to some of the mechanics behind movement
 * [ ] Created your own 3D object
 
-## To Submit on Canvas
+## Submit on Canvas
 
 
 * [x] The surge URL for your sphere animation site
