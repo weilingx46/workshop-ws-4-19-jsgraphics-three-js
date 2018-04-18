@@ -240,7 +240,15 @@ And finally, we define our event listener:
 
 And there you have it!
 
-Feel free to experiment with the sphere’s texture/image (other planets?), background (add stars?), animations (zooming, resizing…), and so on. There are other three.js globes out there, and I’d love to see your own variations in the comments!
+### Extra Credit
+
+Now that you know some basic three.js... go nuts! :squirrel:
+Feel free to experiment with: 
+
+* the sphere’s texture and image :full_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
+* background :sparkles:
+* animations (zooming, resizing…) :zap:
+* and so on :relaxed:
 
 ## Summary / What you Learned
 
