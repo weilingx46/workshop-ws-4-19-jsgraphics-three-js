@@ -243,11 +243,12 @@ And there you have it!
 ### Extra Credit
 
 Now that you know some basic three.js... go nuts! :squirrel:
+
 Feel free to experiment with: 
 
-* the sphere’s texture and image :full_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
-* background :sparkles:
-* animations (zooming, resizing…) :zap:
+* the sphere’s texture and image :first_quarter_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
+* background :star2:
+* animations (zooming, resizing…) :mag:
 * and so on :relaxed:
 
 ## Summary / What you Learned
