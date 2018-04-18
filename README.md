@@ -1,10 +1,10 @@
 # CS52 Workshops: JS Graphics
 
-[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here <-- assuming there's a link to the presentation...
+[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here.
 
 ## Overview
 
-We'll be going over some of the basics of Three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
+In this workshop (based on [this tutorial](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)), we'll be going over some of the basics of three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
 
 ![globe](./public/globe-cap.png)
 
@@ -22,7 +22,7 @@ npm start
 
 ### Getting Started
 
-##### 1. Set up your files2
+##### 1. Set up your files
 
 Your HTML file can look something like this:
 
