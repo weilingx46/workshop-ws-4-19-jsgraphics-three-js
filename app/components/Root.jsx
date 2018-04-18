@@ -72,7 +72,7 @@ scene.add(globe)
 
 // instantiate a loader
 var loader = new THREE.TextureLoader()
-loader.load( 'tim.jpg', function ( texture ) {
+loader.load( 'land_ocean_ice_cloud_2048.jpg', function ( texture ) {
     //create the sphere
     var sphere = new THREE.SphereGeometry( RADIUS, SEGMENTS, RINGS )
 
