@@ -27,6 +27,7 @@ Let’s start off with some basic html to get our site going. Create a new docum
  Your HTML file can look something like this:
 
 ```javascript
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>It’s a Large World</title>
@@ -64,6 +65,7 @@ And add a black background:
 #### 4. The Camera
 We need to declare some variables that our camera is going to use!
 ``` javascript
+const VIEW_ANGLE = 45;
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 const FOV= 45; 
