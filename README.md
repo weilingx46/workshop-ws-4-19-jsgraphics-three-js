@@ -8,10 +8,6 @@ In this workshop (a simplified version of [this tutorial](https://levelup.gitcon
 
 ![globe](./images/globe-cap.png)
 
-## Setup
-
-Just follow the instructions below!
-
 ## Getting Started
 
 #### 1. Basic Html
