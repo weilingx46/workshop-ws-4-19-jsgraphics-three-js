@@ -1,6 +1,6 @@
 # CS52 Workshops: JS Graphics
 
-[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation here <-- assuming there's a link to the presentation...
+[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation [here](https://docs.google.com/presentation/d/1c2CtIdMvfPKbB00aLnUaamjW1Q0rkktd3y15IYumsQc/edit#slide=id.g38a0db7ed0_0_8)
 
 ## Overview
 
