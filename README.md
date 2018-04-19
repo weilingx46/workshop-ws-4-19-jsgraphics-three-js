@@ -10,13 +10,7 @@ In this workshop (a simplified version of [this tutorial](https://levelup.gitcon
 
 ## Setup
 
-Clone this repo and follow the instructions below to get started!
-
-```bash
-git clone https://github.com/dartmouth-cs52-18S/workshop-ws-4-19-jsgraphics-three-js.git
-npm install
-npm start
-```
+Just follow the instructions below!
 
 ## Getting Started
 
@@ -42,7 +36,7 @@ Let’s start off with some basic HTML to get our site going. Create a new docum
 
 #### 2. DOM Element
 
-Let’s create another file in the same directory and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
+Let’s create another file in the same directory as `index.html` and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
 
 ```javascript
 const container = document.querySelector('#container')
