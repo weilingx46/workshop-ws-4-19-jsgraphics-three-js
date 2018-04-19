@@ -232,6 +232,8 @@ And finally, we define our event listener:
 
 And there you have it!
 
+Run `python -m SimpleHTTPServer` to run your project!
+
 ## Deployment
 
 Finally, let’s deploy our beautiful animation to surge! :rocket: You’ve done this a million times by now but here are the steps in case you forgot…
