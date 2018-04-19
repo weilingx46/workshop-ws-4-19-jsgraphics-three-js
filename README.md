@@ -6,7 +6,7 @@
 
 In this workshop (a simplified version of [this tutorial](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)), we'll be going over some of the basics of three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
 
-![globe](./public/globe-cap.png)
+![globe](./images/globe-cap.png)
 
 ## Setup
 
