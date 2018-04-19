@@ -277,12 +277,13 @@ Feel free to experiment with:
 
 Check out some of these websites!
 
-Mobile VR (Text the link to yourself, and check it out on your phone): https://threejs.org/examples/misc_controls_deviceorientation.html
-
 https://www.cubeslam.com/qitarj
 
 https://poly.google.com/
 
 https://tympanus.net/codrops/2016/04/26/the-aviator-animating-basic-3d-scene-threejs/
+
+
+Mobile VR (Text the link to yourself, and check it out on your phone): https://threejs.org/examples/misc_controls_deviceorientation.html
 
 
