@@ -1,10 +1,10 @@
 # CS52 Workshops: JS Graphics
 
-[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL which allows it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in the presentation [here](https://docs.google.com/presentation/d/1c2CtIdMvfPKbB00aLnUaamjW1Q0rkktd3y15IYumsQc/edit#slide=id.g38a0db7ed0_0_8)
+[Three.js](https://threejs.org/) is a Javascript library that allows users to easily create and animate 3D models and graphics. It is built using WebGL allowing it to render graphics in most modern web browsers without extra plugins. It's commonly used in a lot of websites as seen in our presentation [here](https://docs.google.com/presentation/d/1c2CtIdMvfPKbB00aLnUaamjW1Q0rkktd3y15IYumsQc/edit#slide=id.g38a0db7ed0_0_8)
 
 ## Overview
 
-In this workshop (a simplified version of [this tutorial](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)), we'll be going over some of the basics of three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, etc…
+In our workshop (a simplified version of [this tutorial](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)), we'll be going over some of the basics of three.js by creating a globe that you can rotate with your mouse. With this, you'll learn about creating some of the basic components in three.js such as a scene, camera, renderer, lighting, etc…
 
 ![globe](./images/globe-cap.png)
 
@@ -32,7 +32,9 @@ Let’s start off with some basic HTML to get our site going. Create a new docum
 
 #### 2. DOM Element
 
-Let’s create another file in the same directory as `index.html` and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
+Let’s create another file (in the same directory as `index.html`) and call it `main.js`. 
+
+This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html`, we need to call the container in our `main.js` file.
 
 ```javascript
 const container = document.querySelector('#container')
@@ -40,7 +42,7 @@ const container = document.querySelector('#container')
 
 ## The 3D Render
 
-A 3D render is made up of three things **scene**, **camera**, and **renderer**. These are three things are necessary to actually have anything displayed. The next steps involve instantiating these.
+A 3D render is made up of three crucial participants: **scene**, **camera**, and **renderer**. The next steps involve instantiating these.
 
 
 #### 3. Create the Scene
@@ -49,12 +51,14 @@ Let’s start off with the scene. Our 3D render needs a place to live, right?
 
 `const scene = new THREE.Scene()`
 
-And add a black background:
+And add a black background: 
+
 `scene.background = new THREE.Color( 0x000 )`
 
 #### 4. The Camera
 We need to declare some variables that our camera is going to use!
-``` javascript
+
+```javascript
 const WIDTH = window.innerWidth
 const HEIGHT = window.innerHeight
 const FOV= 45
@@ -62,13 +66,14 @@ const ASPECT = WIDTH / HEIGHT
 const NEAR = 0.1
 const FAR = 10000
 ```
+
 What do these all mean??
 
 * **FOV**: Field of vision is the amount of the scene that is displayed on the screen calculated in degrees.
 * **Aspect**: Our aspect ratio should almost always be the `window.width / window.height` so that we do not squish objects when viewing on different devices.
 * **Near** and **Far**: These values affect the performance in determining what gets rendered. Objects farther from the camera than **far** won’t get rendered and objects closer than **near** will also not render.
-Highly recommend you **play around with these** to understand what is going on.
-Three.js has multiple cameras for different project applications. Thy range from the OrthographicCamera that is used for rendering 2d models to the [ArrayCamera](https://threejs.org/docs/#api/cameras/ArrayCamera) that’s used for Virtual Reality. We will be using the PerspectiveCamera as it is best-applied purpose are 3d models.
+We highly recommend that you **play around with these** to understand what is going on.
+Three.js has multiple cameras for different project applications. They range from the [OrthographicCamera](https://threejs.org/docs/index.html#api/cameras/OrthographicCamera) that is used for rendering 2D models to the [ArrayCamera](https://threejs.org/docs/#api/cameras/ArrayCamera) that’s used for Virtual Reality. We will be using the [PerspectiveCamera](https://threejs.org/docs/index.html#api/cameras/PerspectiveCamera) as it is best applied to 3D models.
 
 Instantiate the camera:
 
@@ -85,7 +90,7 @@ Finally, let’s attach the camera to the scene.
 #### 5. The WebGL Renderer
 
 Finally the last necessary object, the renderer!
-WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser.
+WebGL (Web Graphics Library) renders interactive 2D and 3D graphics in the browser.
 
 ``` javascript
 const renderer = new THREE.WebGLRenderer()
@@ -94,6 +99,7 @@ renderer.setSize(WIDTH, HEIGHT)
 
 
 Tell your program that there is a container that needs rendering!
+
 `container.appendChild(renderer.domElement)`
 
 ## Creating the Globe
@@ -101,9 +107,9 @@ Now we can move on to our globe!
 
 #### 6. Create a sphere
 
-Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes, cylinders, etc. Since I’m going for an Earth look, I’ll be using a sphere.
+Three.js uses geometric meshes to create primitive 3D shapes like spheres, cubes, cylinders, etc. Since we want to model Earth, we'll be using a sphere.
 
-We’ll start by defining the sphere’s attributes:
+We start by defining the sphere’s attributes:
 
 ``` javascript
 const RADIUS = 200
@@ -118,15 +124,16 @@ const globe = new THREE.Group()
 scene.add(globe)
 ```
 
-And now, we’ll create our sphere and its texture, and mesh them together using three.js' TextureLoader:
+And now, we’ll create our sphere and its texture, and mesh them together using TextureLoader:
 
 `var loader = new THREE.TextureLoader()`
 
-We call the load method, which takes in our image URL ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that:
-Creates a sphere with the predefined attributes
-Maps the texture to the material (read more here about materials in the three.js [docs](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)
-Creates a mesh of our sphere and the material
-Adds the mesh to our globe group.
+We call the load method, which takes an image URL ([here’s the one we used](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg)) as the first argument, and a function that:
+
+* Creates a sphere with the predefined attributes
+* Maps the texture to the material (read more here about three.js materials [here](https://threejs.org/docs/index.html#manual/introduction/Creating-a-scene)
+* Creates a mesh of our sphere and the material
+* Adds the mesh to our globe group
 
 ``` javascript
 loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg', function ( texture ) {
@@ -151,7 +158,7 @@ Now that we have our sphere, let’s position it backward (along the z-axis) so 
 
 #### 7. Add lighting
 
-Lighting is incredibly important in any 3D scene. Because we used a mesh material, our globe won’t be affected by the lighting, but it’s useful when using other objects. For our lighting, we’ll be using a point light. A point light gets emitted from a single point in all directions. A common use case for pointlight is to replicate the light emitted from a bare lightbulb.
+Lighting is incredibly important in any 3D scene. Because we used a mesh material, our globe won’t be affected by the lighting, but it’s useful when modeling objects with other textures. For our lighting, we’ll be using a point light. A point light gets emitted from a single point in all directions. A common use case for pointlight is to replicate the light emitted from a bare lightbulb.
 
 The pointlight takes 4 parameters: color, intensity, distance, and decay. All the parameters are optional, with the default color being 0xFFFFFF.
 
@@ -175,9 +182,9 @@ At this point, you should see a static globe if you open your HTML file in the b
 
 #### 8. Set up animation loop
 
-First, we’re going to set up the update function for the built-in `requestAnimationFrame` to initially render our scene, and to re-render our scene after changes:
+First, we’re going to set up the update function for the built-in `requestAnimationFrame` to initially render our scene, and to re-render our scene after changes.
 
-``` javascript
+```javascript
 function update () {
 
   //Render:
@@ -193,7 +200,7 @@ requestAnimationFrame(update)
 
 #### 9. Rotate on mouse movement
 
-This is the best part because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad.
+This is the best part because it almost feels like you’re spinning the globe with your own hands when you’re controlling it with your mouse or trackpad :stuck_out_tongue:
 
 To start, we’ll set up an array that stores our previous mouse position, with its start value being at the center of the page:
 
@@ -208,6 +215,7 @@ function rotateOnMouseMove(e) {
   //calculate difference between current and last mouse position
   const moveX = ( e.clientX - lastMove[0])
   const moveY = ( e.clientY - lastMove[1])
+  
   //rotate the globe based on distance of mouse moves (x and y)
   globe.rotation.y += ( moveX * .005)
   globe.rotation.x += ( moveY * .005)
