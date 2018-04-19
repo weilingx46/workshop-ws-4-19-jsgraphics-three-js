@@ -22,10 +22,7 @@ npm start
 
 #### 1. Basic Html
 
-Let’s start off with some basic HTML to get our site going. Create a new document and let's call it `index.html`. Below we are including the three.js library
-`npm install three`
-
-Lets then declare a basic container where our project will live. 
+Let’s start off with some basic HTML to get our site going. Create a new document and let's call it `index.html`. Let's then declare a basic container where our project will live. 
 
  Your HTML file can look something like this:
 
@@ -45,7 +42,7 @@ Lets then declare a basic container where our project will live.
 
 #### 2. DOM Element
 
-Let’s create another file in the same directory and call it `main.js`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `main.js` file below.
+Let’s create another file in the same directory and call it `Root.jsx`. This is where all of the code that makes up our 3D render will be going. To target the container we just made in our `index.html` we need to call the container in our `Root.jsx` file below.
 
 ```javascript
 const container = document.querySelector('#container')
@@ -254,7 +251,7 @@ Feel free to experiment with:
 * the sphere’s texture and image :first_quarter_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
 * background :star2:
 * animations (zooming, resizing…) :mag:
-* adding new shapes: [Three Js Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
+* adding new shapes using [Three Js Geometry](https://threejs.org/docs/index.html#api/core/Geometry)
 * and so on :relaxed:
 
 ## What You Did
