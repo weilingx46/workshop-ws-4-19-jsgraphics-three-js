@@ -12,7 +12,7 @@ In this workshop (a simplified version of [this tutorial](https://levelup.gitcon
 
 #### 1. Basic Html
 
-Let’s start off with some basic HTML to get our site going. Create a new document and let's call it `index.html`. Let's then declare a basic container where our project will live. 
+Let’s start off with some basic HTML to get our site going. Create a new document and let's call it `index.html`. Let's then declare a basic container where our project will live.
 
  Your HTML file can look something like this:
 
@@ -40,10 +40,10 @@ const container = document.querySelector('#container')
 
 ## The 3D Render
 
-A 3D render is made up of three things **scene**, **camera**, and **renderer**. These are three things are necessary to actually have anything displayed. The next steps involve instantiating these. 
+A 3D render is made up of three things **scene**, **camera**, and **renderer**. These are three things are necessary to actually have anything displayed. The next steps involve instantiating these.
 
 
-#### 3. Create the Scene 
+#### 3. Create the Scene
 
 Let’s start off with the scene. Our 3D render needs a place to live, right?
 
@@ -78,14 +78,14 @@ We also need to set the camera's location on the screen with x,y,z. We encourage
 
 `camera.position.set( 0, 0, 500 )`
 
-Finally, let’s attach the camera to the scene. 
+Finally, let’s attach the camera to the scene.
 
 `scene.add(camera)`
 
 #### 5. The WebGL Renderer
 
-Finally the last necessary object, the renderer! 
-WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser. 
+Finally the last necessary object, the renderer!
+WebGL (Web Graphics Library) renders interactive 2 and 3D graphics in the browser.
 
 ``` javascript
 const renderer = new THREE.WebGLRenderer()
@@ -151,9 +151,9 @@ Now that we have our sphere, let’s position it backward (along the z-axis) so 
 
 #### 7. Add lighting
 
-Since we used MeshBasicMaterial in the previous step (a material which is not affected by lighting), this next step is dispensable, but I we’re including it in this tutorial because it’s usually an important component of a 3D scene.
+Lighting is incredibly important in any 3D scene. Because we used a mesh material, our globe won’t be affected by the lighting, but it’s useful when using other objects. For our lighting, we’ll be using a point light. A point light gets emitted from a single point in all directions. A common use case for pointlight is to replicate the light emitted from a bare lightbulb.
 
-First we’ll create a point light (the library has several other types of light):
+The pointlight takes 4 parameters: color, intensity, distance, and decay. All the parameters are optional, with the default color being 0xFFFFFF.
 
 `const pointLight = new THREE.PointLight(0xFFFFFF)`
 
@@ -184,7 +184,7 @@ function update () {
   renderer.render(scene, camera)
 
   // Schedule the next frame:
-  requestAnimationFrame(update) 
+  requestAnimationFrame(update)
 }
 
 // Schedule the first frame:
@@ -208,7 +208,7 @@ function rotateOnMouseMove(e) {
   //calculate difference between current and last mouse position
   const moveX = ( e.clientX - lastMove[0])
   const moveY = ( e.clientY - lastMove[1])
-  //rotate the globe based on distance of mouse moves (x and y) 
+  //rotate the globe based on distance of mouse moves (x and y)
   globe.rotation.y += ( moveX * .005)
   globe.rotation.x += ( moveY * .005)
 
@@ -236,7 +236,7 @@ Finally, let’s deploy our beautiful animation to surge! :rocket: You’ve done
 
 Now that you know some basic three.js... go nuts! :squirrel:
 
-Feel free to experiment with: 
+Feel free to experiment with:
 
 * the sphere’s texture and image :first_quarter_moon_with_face: (see [here](http://flatplanet.sourceforge.net/maps/alien.html) for some flat planet images...)
 * background :star2:
@@ -263,6 +263,6 @@ Feel free to experiment with:
 * [Reference Tutorial for this Workshop](https://levelup.gitconnected.com/tutorial-build-an-interactive-virtual-globe-with-three-js-33cf7c2090cb)
 * [Aerotwist Tutorial](https://aerotwist.com/tutorials/getting-started-with-three-js/)
 * [Another Tutorial](https://codepen.io/natacoops/post/sugar-sugar-threejs-project-walkthrough)
-* [threejs.org](https://threejs.org/) 
+* [threejs.org](https://threejs.org/)
 
 Check out some of these websites!
